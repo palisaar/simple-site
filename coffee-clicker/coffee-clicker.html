@@ -2,9 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Clicker - Retro</title>
+    <link rel="stylesheet" href="coffee-clicker.css">
 </head>
 <body>
+<div id="coffee-art">
+    <pre>
+      ( (
+       ) )
+      ........
+        |       |]
+      \      /
+       `----'
+    </pre>
+</div>
+<div id="coffee-container">
+    <button id="click-button">Click for Coffee!</button>
+    <p>Coffee: <span id="coffee-number">0</span></p>
+    <p>Per Click: <span id="coffee-number-click">1</span></p>
+    <p>Per Second: <span id="coffee-number-second">0</span></p>
+</div>
+
+<div id="upgrades">
+    <div id="cursor">
+        <p>Cursor Upgrade (Per Click): <span class="level">1</span> | Cost: <span class="price">10</span></p>
+        <input type="button" value="Buy Cursor Upgrade" />
+    </div>
+    <div id="factory">
+        <p>Factory Upgrade (Per Second): <span class="level">0</span> | Cost: <span class="price">50</span></p>
+        <input type="button" value="Buy Factory Upgrade" />
+    </div>
+    <div id="multiplier">
+        <p>Multiplier Upgrade: <span class="level">1</span> | Cost: <span class="price">100</span></p>
+        <input type="button" value="Buy Multiplier Upgrade" />
+    </div>
+</div>
+
+<!-- Cookie Banner -->
+<div id="cookie-banner">
+    <p>We use cookies to enhance your experience. By clicking "Agree", you consent to our use of cookies.</p>
+    <button id="agree-button">Agree</button>
+    <button id="disagree-button">Disagree</button>
+</div>
+
+<script src="coffee-clicker.js"></script>
 
 </body>
 </html>

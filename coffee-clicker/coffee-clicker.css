@@ -1,0 +1,124 @@
+/* Body: Retro black and green aesthetic */
+body {
+    font-family: 'Courier New', Courier, monospace; /* Retro-style font */
+    background-color: black; /* Black background */
+    color: #00FF00; /* Bright green text */
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Text styles */
+#coffee-container p, #upgrades p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+/* Button and input styles */
+button, input[type="button"] {
+    background-color: black; /* Black button background */
+    color: #00FF00; /* Green text */
+    border: 2px solid #00FF00; /* Green border */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+/* Button hover effect */
+button:hover, input[type="button"]:hover {
+    background-color: #00FF00; /* Green hover background */
+    color: black; /* Black text */
+    transform: scale(1.1); /* Slightly enlarge the button */
+}
+
+/* Disabled button styles */
+button:disabled, input[type="button"]:disabled {
+    border-color: #006400; /* Dark green border for disabled */
+    color: #006400; /* Dark green text for disabled */
+    cursor: not-allowed;
+}
+
+/* Container borders (No glow) */
+#coffee-container, #upgrades {
+    border: 2px solid #00FF00;
+    padding: 20px;
+    margin: 20px;
+    width: 90%;
+    max-width: 600px;
+    text-align: left;
+}
+
+/* Coffee container: Center elements */
+#coffee-container {
+    text-align: center;
+}
+
+/* Upgrade section */
+#upgrades {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#upgrades div {
+    border: 1px solid #00FF00;
+    padding: 10px;
+}
+
+/* Input buttons inside upgrade sections */
+#upgrades div input {
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* Cookie Banner Styling */
+#cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    color: #00FF00;
+    border-top: 2px solid #00FF00;
+    text-align: center;
+    padding: 15px;
+    font-size: 1.1em;
+    z-index: 9999;
+}
+
+#cookie-banner p {
+    margin: 0;
+}
+
+#cookie-banner a {
+    color: #00FF00;
+    text-decoration: underline;
+}
+
+#cookie-banner button {
+    background-color: black;
+    color: #00FF00;
+    border: 2px solid #00FF00;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+#cookie-banner button:hover {
+    background-color: #00FF00;
+    color: black;
+    transform: scale(1.1);
+}
