@@ -1,3 +1,3 @@
 function showMessage() {
-    alert("Welcome to the Retro Web!");
+    alert("BOO!");
 }
