@@ -146,3 +146,40 @@ button[disabled]:hover {
 #game {
     margin-top: 30px; /* Reduced margin from top */
 }
+
+/* Cookie Consent Banner */
+#cookie-banner {
+    background-color: black;
+    color: #00FF00;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    display: none; /* Hidden by default */
+}
+
+#cookie-banner p {
+    margin: 0;
+    font-size: 1.1em;
+}
+
+#cookie-banner button {
+    background-color: #00FF00;
+    color: black;
+    border: 2px solid #00FF00;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1em;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+#cookie-banner button:hover {
+    background-color: black;
+    color: #00FF00;
+    transform: scale(1.05);
+}

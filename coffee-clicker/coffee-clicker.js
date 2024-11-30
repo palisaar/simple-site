@@ -137,3 +137,48 @@ loadGameState();
 // Start the game loop
 setInterval(gameLoop, 1000); // Game loop to increase coffee per second
 
+// Grab cookie consent banner and buttons
+const cookieBanner = document.getElementById("cookie-banner");
+const cookieAcceptButton = document.getElementById("cookie-accept");
+const cookieDeclineButton = document.getElementById("cookie-decline");
+
+// Function to check if cookies have been accepted
+function checkCookieConsent() {
+    const consent = localStorage.getItem("cookieConsent");
+    if (consent === "accepted") {
+        startGame(); // If consent is already given, start the game
+    } else {
+        cookieBanner.style.display = "block"; // Show the banner if consent not given
+    }
+}
+
+// Handle cookie acceptance
+cookieAcceptButton.addEventListener("click", function() {
+    localStorage.setItem("cookieConsent", "accepted"); // Store the consent in localStorage
+    cookieBanner.style.display = "none"; // Hide the banner
+    startGame(); // Start the game after acceptance
+});
+
+// Handle cookie decline
+cookieDeclineButton.addEventListener("click", function() {
+    localStorage.setItem("cookieConsent", "declined"); // Store the declined consent
+    cookieBanner.style.display = "none"; // Hide the banner (you can show a different message if needed)
+    // Optionally, redirect or stop further interaction here (e.g., redirect to another page)
+    window.location.href = "../index.html"; // Redirect to the main page if declined
+});
+
+// Function to start the game
+function startGame() {
+    loadGameState(); // Initialize the game state
+    setInterval(gameLoop, 1000); // Start the game loop
+}
+
+// Check if cookie consent has been accepted when the page loads
+window.addEventListener("load", function() {
+    const consent = localStorage.getItem("cookieConsent");
+    if (!consent || consent !== "accepted") {
+        cookieBanner.style.display = "block"; // Show the banner if not accepted
+    } else {
+        startGame(); // Start the game immediately if consent is already given
+    }
+});
