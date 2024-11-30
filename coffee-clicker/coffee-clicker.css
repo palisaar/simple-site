@@ -159,7 +159,7 @@ button[disabled]:hover {
     left: 0;
     width: 100%;
     z-index: 9999;
-    display: none; /* Hidden by default */
+    display: none; /* Hidden b y default */
 }
 
 #cookie-banner p {

@@ -179,6 +179,6 @@ window.addEventListener("load", function() {
     if (!consent || consent !== "accepted") {
         cookieBanner.style.display = "block"; // Show the banner if not accepted
     } else {
-        startGame(); // Start the game immediately if consent is already given
+        startGame(); // Star t the game immediately if consent is already given
     }
 });
