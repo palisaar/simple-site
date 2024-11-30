@@ -1,185 +1,139 @@
-// DOM Elements
-const clickButton = document.getElementById('click-button');
-const coffeeNumberDisplay = document.getElementById('coffee-number');
-const coffeePerClickDisplay = document.getElementById('coffee-number-click');
-const coffeePerSecondDisplay = document.getElementById('coffee-number-second');
+// Grab DOM elements
+const coffeeMugButton = document.getElementById("coffee-mug-button");
+const brewButton = document.getElementById("brew-button");
+const coffeeNumberDisplay = document.getElementById("coffee-number");
+const coffeeNumberClickDisplay = document.getElementById("coffee-number-click");
+const coffeeNumberSecondDisplay = document.getElementById("coffee-number-second");
 
-const cursorUpdateBtn = document.querySelector('#cursor > input');
-const factoryUpdateBtn = document.querySelector('#factory > input');
-const multiplierUpdateBtn = document.querySelector('#multiplier > input');
+const cursorUpgradeButton = document.getElementById("cursor-upgrade");
+const factoryUpgradeButton = document.getElementById("factory-upgrade");
+const multiplierUpgradeButton = document.getElementById("multiplier-upgrade");
 
-// Cookie Banner Elements
-const cookieBanner = document.getElementById('cookie-banner');
-const agreeButton = document.getElementById('agree-button');
-const disagreeButton = document.getElementById('disagree-button');
-
-// Default values (in case there's no saved data)
-let coffee = 0;
-let coffeePerClick = 1;
-let coffeePerSecond = 0;
-
-let cursorLevel = 1;
-let cursorPrice = 10;
-let factoryLevel = 0;
-let factoryPrice = 50;
-let multiplierLevel = 1;
-let multiplierPrice = 100;
+const cursorPriceDisplay = document.getElementById("cursor-price");
+const factoryPriceDisplay = document.getElementById("factory-price");
+const multiplierPriceDisplay = document.getElementById("multiplier-price");
 
 // Load saved game state from localStorage
-function loadGame() {
-    coffee = parseInt(localStorage.getItem('coffee')) || 0;
-    coffeePerClick = parseInt(localStorage.getItem('coffeePerClick')) || 1;
-    coffeePerSecond = parseInt(localStorage.getItem('coffeePerSecond')) || 0;
+function loadGameState() {
+    const savedState = JSON.parse(localStorage.getItem("coffeeGameState"));
+    if (savedState) {
+        coffee = savedState.coffee || 0;
+        coffeePerClick = savedState.coffeePerClick || 1;
+        coffeePerSecond = savedState.coffeePerSecond || 0;
 
-    cursorLevel = parseInt(localStorage.getItem('cursorLevel')) || 1;
-    cursorPrice = parseInt(localStorage.getItem('cursorPrice')) || 10;
-    factoryLevel = parseInt(localStorage.getItem('factoryLevel')) || 0;
-    factoryPrice = parseInt(localStorage.getItem('factoryPrice')) || 50;
-    multiplierLevel = parseInt(localStorage.getItem('multiplierLevel')) || 1;
-    multiplierPrice = parseInt(localStorage.getItem('multiplierPrice')) || 100;
+        cursorLevel = savedState.cursorLevel || 1;
+        cursorPrice = savedState.cursorPrice || 10;
+        factoryLevel = savedState.factoryLevel || 0;
+        factoryPrice = savedState.factoryPrice || 50;
+        multiplierLevel = savedState.multiplierLevel || 1;
+        multiplierPrice = savedState.multiplierPrice || 100;
+    } else {
+        // If no saved state, initialize with defaults
+        coffee = 0;
+        coffeePerClick = 1;
+        coffeePerSecond = 0;
 
-    showCoffee(); // Update the UI with the loaded values
+        cursorLevel = 1;
+        cursorPrice = 10;
+        factoryLevel = 0;
+        factoryPrice = 50;
+        multiplierLevel = 1;
+        multiplierPrice = 100;
+    }
 }
 
 // Save game state to localStorage
-function saveGame() {
-    localStorage.setItem('coffee', coffee);
-    localStorage.setItem('coffeePerClick', coffeePerClick);
-    localStorage.setItem('coffeePerSecond', coffeePerSecond);
-
-    localStorage.setItem('cursorLevel', cursorLevel);
-    localStorage.setItem('cursorPrice', cursorPrice);
-    localStorage.setItem('factoryLevel', factoryLevel);
-    localStorage.setItem('factoryPrice', factoryPrice);
-    localStorage.setItem('multiplierLevel', multiplierLevel);
-    localStorage.setItem('multiplierPrice', multiplierPrice);
+function saveGameState() {
+    const gameState = {
+        coffee: coffee,
+        coffeePerClick: coffeePerClick,
+        coffeePerSecond: coffeePerSecond,
+        cursorLevel: cursorLevel,
+        cursorPrice: cursorPrice,
+        factoryLevel: factoryLevel,
+        factoryPrice: factoryPrice,
+        multiplierLevel: multiplierLevel,
+        multiplierPrice: multiplierPrice
+    };
+    localStorage.setItem("coffeeGameState", JSON.stringify(gameState));
 }
 
-// Increment coffee on click
-clickButton.addEventListener('click', () => {
-    coffee += coffeePerClick;
-    saveGame();
-    showCoffee();
-});
-
-// Cursor upgrade: increases coffee per click
-cursorUpdateBtn.addEventListener('click', () => {
-    if (coffee >= cursorPrice) {
-        cursorLevel++;
-        coffeePerClick += 1 * multiplierLevel; // Coffee per click scales with multiplier
-        coffee -= cursorPrice;
-        cursorPrice *= 2; // Price doubles after every purchase
-        saveGame();
-        showCoffee();
-    }
-});
-
-// Factory upgrade: increases coffee per second
-factoryUpdateBtn.addEventListener('click', () => {
-    if (coffee >= factoryPrice) {
-        factoryLevel++;
-        coffeePerSecond += 1 * multiplierLevel; // Coffee per second scales with multiplier
-        coffee -= factoryPrice;
-        factoryPrice *= 2; // Price doubles after every purchase
-        saveGame();
-        showCoffee();
-    }
-});
-
-// Multiplier upgrade: scales coffee per click and per second
-multiplierUpdateBtn.addEventListener('click', () => {
-    if (coffee >= multiplierPrice) {
-        multiplierLevel++;
-        coffeePerClick = cursorLevel * multiplierLevel; // Recalculate based on levels
-        coffeePerSecond = factoryLevel * multiplierLevel; // Recalculate based on levels
-        coffee -= multiplierPrice;
-        multiplierPrice *= 3; // Price triples after every purchase
-        saveGame();
-        showCoffee();
-    }
-});
-
-// Game loop: adds coffee per second every second
-function gameloop() {
-    coffee += coffeePerSecond;
-    saveGame();
-    showCoffee();
-}
-
-// Update the UI to reflect game state
+// Show coffee and update button states
 function showCoffee() {
-    coffeeNumberDisplay.innerHTML = formatNumber(coffee);
-    coffeePerClickDisplay.innerHTML = formatNumber(coffeePerClick);
-    coffeePerSecondDisplay.innerHTML = formatNumber(coffeePerSecond);
+    coffeeNumberDisplay.textContent = coffee;
+    coffeeNumberClickDisplay.textContent = coffeePerClick;
+    coffeeNumberSecondDisplay.textContent = coffeePerSecond;
 
-    // Update upgrade views
-    updateUpgradeView('cursor', cursorLevel, cursorPrice);
-    updateUpgradeView('factory', factoryLevel, factoryPrice);
-    updateUpgradeView('multiplier', multiplierLevel, multiplierPrice);
+    cursorPriceDisplay.textContent = cursorPrice;
+    factoryPriceDisplay.textContent = factoryPrice;
+    multiplierPriceDisplay.textContent = multiplierPrice;
 
-    // Disable buttons if coffee is insufficient
-    setDisable(coffee >= cursorPrice, cursorUpdateBtn);
-    setDisable(coffee >= factoryPrice, factoryUpdateBtn);
-    setDisable(coffee >= multiplierPrice, multiplierUpdateBtn);
+    // Disable buttons if not enough coffee
+    setButtonState(cursorUpgradeButton, coffee >= cursorPrice);
+    setButtonState(factoryUpgradeButton, coffee >= factoryPrice);
+    setButtonState(multiplierUpgradeButton, coffee >= multiplierPrice);
+
+    // Save the game state after updating
+    saveGameState();
 }
 
-// Update the display for an upgrade
-function updateUpgradeView(id, level, price) {
-    const levelDisplay = document.querySelector(`#${id} > .level`);
-    const priceDisplay = document.querySelector(`#${id} .price`);
-    levelDisplay.innerHTML = level;
-    priceDisplay.innerHTML = formatNumber(price);
-}
-
-// Disable or enable buttons
-function setDisable(able, btn) {
-    if (able) {
-        btn.removeAttribute("disabled");
+// Set the state (enabled/disabled) of a button
+function setButtonState(button, enabled) {
+    if (enabled) {
+        button.removeAttribute("disabled");
     } else {
-        btn.setAttribute("disabled", "");
+        button.setAttribute("disabled", "true");
     }
 }
 
-// Format large numbers for better readability
-function formatNumber(num) {
-    if (num > 1000000000) {
-        return (num / 1000000000).toFixed(2) + ' B';
-    }
-    if (num > 1000000) {
-        return (num / 1000000).toFixed(2) + ' M';
-    }
-    if (num > 1000) {
-        return (num / 1000).toFixed(2) + ' K';
-    }
-    return num;
-}
-
-// Check if the user has agreed to the cookies
-function checkCookieAgreement() {
-    const cookieConsent = localStorage.getItem('cookieConsent');
-    if (!cookieConsent) {
-        // If no consent, show the banner
-        cookieBanner.style.display = 'block';
-    } else {
-        // If consent is already given, hide the banner and load the game
-        cookieBanner.style.display = 'none';
-        loadGame();
-        setInterval(gameloop, 1000);
-    }
-}
-
-// Handle agreement
-agreeButton.addEventListener('click', () => {
-    localStorage.setItem('cookieConsent', 'true'); // Store the user's agreement
-    cookieBanner.style.display = 'none'; // Hide the banner
-    loadGame(); // Proceed with loading the game
-    setInterval(gameloop, 1000); // Start the game loop
+// Brew button event listener
+brewButton.addEventListener("click", function() {
+    console.log("Brew button clicked.");  // Debugging log
+    coffee += coffeePerClick;
+    showCoffee();
 });
 
-// Handle disagreement
-disagreeButton.addEventListener('click', () => {
-    window.location.href = '../index.html'; // Redirect to the index page if they disagree
+// Upgrade button event listeners
+cursorUpgradeButton.addEventListener("click", function() {
+    if (coffee >= cursorPrice) {
+        coffee -= cursorPrice;
+        cursorLevel++;
+        coffeePerClick = cursorLevel * multiplierLevel;
+        cursorPrice = Math.floor(cursorPrice * 1.5);
+        showCoffee();
+    }
 });
 
-// Initialize game
-checkCookieAgreement();
+factoryUpgradeButton.addEventListener("click", function() {
+    if (coffee >= factoryPrice) {
+        coffee -= factoryPrice;
+        factoryLevel++;
+        coffeePerSecond = factoryLevel * multiplierLevel;
+        factoryPrice = Math.floor(factoryPrice * 1.5);
+        showCoffee();
+    }
+});
+
+multiplierUpgradeButton.addEventListener("click", function() {
+    if (coffee >= multiplierPrice) {
+        coffee -= multiplierPrice;
+        multiplierLevel++;
+        coffeePerClick = cursorLevel * multiplierLevel;
+        coffeePerSecond = factoryLevel * multiplierLevel;
+        multiplierPrice = Math.floor(multiplierPrice * 1.5);
+        showCoffee();
+    }
+});
+
+// Game loop function to add coffee per second
+function gameLoop() {
+    coffee += coffeePerSecond;
+    showCoffee();
+}
+
+// Load game state when the page loads
+loadGameState();
+
+// Start the game loop
+setInterval(gameLoop, 1000); // Game loop to increase coffee per second
+

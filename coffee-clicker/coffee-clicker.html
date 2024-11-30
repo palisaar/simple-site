@@ -1,52 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coffee Clicker - Retro</title>
-    <link rel="stylesheet" href="coffee-clicker.css">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coffee Brewing Clicker</title>
+    <link rel="stylesheet" href="coffee-clicker.css" />
 </head>
 <body>
-<div id="coffee-art">
-    <pre>
-      ( (
-       ) )
-      ........
-        |       |]
-      \      /
-       `----'
-    </pre>
-</div>
-<div id="coffee-container">
-    <button id="click-button">Click for Coffee!</button>
-    <p>Coffee: <span id="coffee-number">0</span></p>
-    <p>Per Click: <span id="coffee-number-click">1</span></p>
-    <p>Per Second: <span id="coffee-number-second">0</span></p>
-</div>
+<div id="game">
+    <header>
+        <h1>"Coffee Clicker"</h1>
+    </header>
+    <main>
+        <div class="content-container">
+            <div class="left">
+                <!-- ASCII art for Coffee Mug -->
+                <div id="coffee-mug-button" class="ascii-art-button">
+            <pre id="coffee-mug">
+  ( (
+   ) )
+  ........
+   |      |]
+  |      |
+  `------'
+            </pre>
+                </div>
+                <!-- Brew button under the ASCII art -->
+                <button id="brew-button" class="brew-button">Brew Coffee</button>
+            </div>
 
-<div id="upgrades">
-    <div id="cursor">
-        <p>Cursor Upgrade (Per Click): <span class="level">1</span> | Cost: <span class="price">10</span></p>
-        <input type="button" value="Buy Cursor Upgrade" />
-    </div>
-    <div id="factory">
-        <p>Factory Upgrade (Per Second): <span class="level">0</span> | Cost: <span class="price">50</span></p>
-        <input type="button" value="Buy Factory Upgrade" />
-    </div>
-    <div id="multiplier">
-        <p>Multiplier Upgrade: <span class="level">1</span> | Cost: <span class="price">100</span></p>
-        <input type="button" value="Buy Multiplier Upgrade" />
-    </div>
-</div>
+            <div class="right">
+                <h2><span id="coffee-number">0</span> Cups of Coffee</h2>
+                <p><span id="coffee-number-click">1</span> per Brew - <span id="coffee-number-second">0</span> per Second</p>
 
-<!-- Cookie Banner -->
-<div id="cookie-banner">
-    <p>We use cookies to enhance your experience. By clicking "Agree", you consent to our use of cookies.</p>
-    <button id="agree-button">Agree</button>
-    <button id="disagree-button">Disagree</button>
+                <div id="updates">
+                    <!-- Cursor (Automatic Brewing) -->
+                    <div id="cursor" class="update-box">
+                        <div class="level">1</div>
+                        <div>
+                            Increase Brew per Click<br />Price:
+                            <span class="price" id="cursor-price">10</span> Coffee
+                        </div>
+                        <input type="button" id="cursor-upgrade" value="Buy" />
+                    </div>
+
+                    <!-- Factory (Automated Coffee Machine) -->
+                    <div id="factory" class="update-box">
+                        <div class="level" id="factory-level">0</div>
+                        <div>
+                            Increase Coffee per Second<br />Price:
+                            <span class="price" id="factory-price">50</span> Coffee
+                        </div>
+                        <input type="button" id="factory-upgrade" value="Buy" />
+                    </div>
+
+                    <!-- Multiplier (Coffee Boost) -->
+                    <div id="multiplier" class="update-box">
+                        <div class="level" id="multiplier-level">1</div>
+                        <div>
+                            Coffee Multiplier<br />Price: <span class="price" id="multiplier-price">100</span> Coffee
+                        </div>
+                        <input type="button" id="multiplier-upgrade" value="Buy" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
 
 <script src="coffee-clicker.js"></script>
-
 </body>
 </html>

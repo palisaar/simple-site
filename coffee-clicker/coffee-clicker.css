@@ -13,112 +13,136 @@ body {
     align-items: center;
 }
 
-/* Text styles */
-#coffee-container p, #upgrades p {
-    font-size: 1.2em;
-    margin-bottom: 10px;
+/* Game Header */
+header h1 {
+    font-size: 2em; /* Smaller title */
+    margin-bottom: 20px;
+    color: #00FF00;
 }
 
-/* Button and input styles */
-button, input[type="button"] {
-    background-color: black; /* Black button background */
-    color: #00FF00; /* Green text */
+/* Coffee Mug ASCII Art */
+#coffee-mug-button pre {
+    font-size: 1.3em; /* Smaller ASCII art */
+    margin-bottom: 20px;
+    background-color: black;
+}
+
+/* Brew Button */
+.brew-button {
+    background-color: #00FF00; /* Green background */
+    color: black; /* Black text */
     border: 2px solid #00FF00; /* Green border */
     font-family: 'Courier New', Courier, monospace;
-    font-size: 16px;
-    padding: 10px 20px;
-    margin: 10px;
+    font-size: 1.2em; /* Smaller font size */
+    padding: 12px 25px; /* Reduced padding */
+    margin: 10px 0; /* Reduced margin */
     cursor: pointer;
     text-transform: uppercase;
     transition: background-color 0.2s, transform 0.2s;
 }
 
-/* Button hover effect */
-button:hover, input[type="button"]:hover {
-    background-color: #00FF00; /* Green hover background */
-    color: black; /* Black text */
-    transform: scale(1.1); /* Slightly enlarge the button */
+.brew-button:hover {
+    background-color: black; /* Black background on hover */
+    color: #00FF00; /* Green text on hover */
+    transform: scale(1.05); /* Slightly smaller hover effect */
 }
 
-/* Disabled button styles */
-button:disabled, input[type="button"]:disabled {
-    border-color: #006400; /* Dark green border for disabled */
-    color: #006400; /* Dark green text for disabled */
-    cursor: not-allowed;
-}
-
-/* Container borders (No glow) */
-#coffee-container, #upgrades {
-    border: 2px solid #00FF00;
-    padding: 20px;
-    margin: 20px;
-    width: 90%;
-    max-width: 600px;
-    text-align: left;
-}
-
-/* Coffee container: Center elements */
-#coffee-container {
-    text-align: center;
-}
-
-/* Upgrade section */
-#upgrades {
+/* Coffee Container: Brew Button and Coffee Stats */
+#game .content-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: center; /* Centered content */
+    width: 80%; /* Adjust width */
+    max-width: 600px; /* Reduced max-width */
 }
 
-#upgrades div {
-    border: 1px solid #00FF00;
-    padding: 10px;
+/* Left Section (Coffee Mug and Brew Button) */
+.left {
+    text-align: center;
+    width: 100%; /* Full width */
 }
 
-/* Input buttons inside upgrade sections */
-#upgrades div input {
-    margin-top: 10px;
-    width: 100%;
+/* Right Section (Coffee Stats and Upgrades) */
+.right {
+    text-align: center;
+    width: 100%; /* Full width */
 }
 
-/* Cookie Banner Styling */
-#cookie-banner {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+/* Coffee Stats Display */
+h2, p {
+    font-size: 1.2em; /* Smaller font size */
+    margin: 10px 0; /* Reduced margin */
+}
+
+/* Update Boxes */
+.update-box {
+    border: 2px solid #00FF00;
+    padding: 12px 20px; /* Reduced padding */
+    margin: 8px 0; /* Reduced margin */
     background-color: black;
     color: #00FF00;
-    border-top: 2px solid #00FF00;
+    width: 100%; /* Full width */
+    max-width: 500px; /* Set a max-width for longer boxes */
     text-align: center;
-    padding: 15px;
-    font-size: 1.1em;
-    z-index: 9999;
 }
 
-#cookie-banner p {
-    margin: 0;
-}
-
-#cookie-banner a {
-    color: #00FF00;
-    text-decoration: underline;
-}
-
-#cookie-banner button {
+/* Upgrade Buttons */
+.update-box input[type="button"] {
     background-color: black;
     color: #00FF00;
     border: 2px solid #00FF00;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 16px;
-    padding: 10px 20px;
-    margin-top: 10px;
+    font-size: 1.1em; /* Smaller font size */
+    padding: 10px 20px; /* Reduced padding */
+    width: 100%; /* Full width */
+    margin-top: 10px; /* Reduced margin */
     cursor: pointer;
     text-transform: uppercase;
     transition: background-color 0.2s, transform 0.2s;
 }
 
-#cookie-banner button:hover {
+.update-box input[type="button"]:hover {
     background-color: #00FF00;
     color: black;
-    transform: scale(1.1);
+    transform: scale(1.05); /* Slightly reduced scale effect */
+}
+
+.update-box input[type="button"]:disabled {
+    background-color: black; /* Keep the background black */
+    border-color: #00FF00; /* Keep the green border */
+    color: black; /* Keep the text black */
+    cursor: not-allowed; /* Indicate that it's not clickable */
+}
+
+/* Upgrade Prices and Levels */
+.update-box .level {
+    font-weight: bold;
+    font-size: 1.1em; /* Smaller font size */
+    margin-bottom: 8px; /* Reduced margin */
+}
+
+/* Coffee Number Display */
+#coffee-number {
+    font-weight: bold;
+    font-size: 1.6em; /* Slightly smaller font size */
+    margin-top: 15px; /* Reduced margin */
+}
+
+/* Disable Button State (when not enough coffee) */
+button[disabled] {
+    background-color: black;  /* Keep the background black */
+    color: black;  /* Keep the text color black */
+    border: 2px solid #00FF00;  /* Keep the border green */
+    cursor: not-allowed;  /* Indicate that the button is not clickable */
+}
+
+button[disabled]:hover {
+    background-color: black;  /* Keep the background black on hover */
+    color: black;  /* Keep the text color black */
+    transform: none;  /* No hover effect */
+}
+
+/* Overall Layout */
+#game {
+    margin-top: 30px; /* Reduced margin from top */
 }
