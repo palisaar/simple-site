@@ -1,0 +1,58 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General Styling */
+body {
+    font-family: "Courier New", Courier, monospace;
+    background-color: black;
+    color: green;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Container */
+.container {
+    border: 5px solid green;
+    padding: 50px;
+}
+
+/* Header */
+header h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+/* Content Section */
+.content p {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+}
+
+/* Button */
+button {
+    background-color: green;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: darkgreen;
+}
+
+/* Footer */
+footer {
+    font-size: 1em;
+    margin-top: 30px;
+}
